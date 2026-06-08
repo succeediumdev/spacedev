@@ -1,5 +1,5 @@
 ''
-SPACE proxy server v2023.10.19
+SPACE proxy server v2026.06.08
 Itellectual property of Succeedium™ (https://succeedium.com)
 Unauthorized use, distribution, transmission or publication strictly prohibited
 '''
