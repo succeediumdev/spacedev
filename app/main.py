@@ -58,27 +58,7 @@ from .settings.spaceLogs import spaceLogsRouter
 from .email.Email import emailRouter
 from .documentation.doc import docRouter
 from .compare.compareRouter import compareRouter
-from .settings.getTime import timeRouter
-from .git.repositories import repositories_router
-from .git.initialize import initialize_router
-from .git.push import push_router
-from .git.pull import pull_router
-from .git.gitCompare import git_compare_router
-
-from .utils.authenticateToken import authenticateToken
-from .utils.readAccess import readAccess
-
-from .db.postgres import init_postgres, get_postgres
-from .db.insert import insertOne, insertMany
-from .db.fetch import fetchOne
-
-from .utils.env import env_variables
-
-from .utils.getActiveUser import getActiveUser
-from .utils.addCorsHeaders import addCorsHeaders
-from .utils.pacloudproxy import pacloudproxy, pacloudtoken
-from .utils.journal import getJournal, updateJournal
-from .utils.snakeCase import snakeCase
+from .settings.getTime import timeRout
 
 from .utils.refreshCron import refreshCron
 
@@ -990,3 +970,44 @@ async def test_connection(request: Request = {}, response: Response = {}):
         return JSONResponse(status_code=400, content={'message': f"Invalid token", "status": "error"}, headers=addCorsHeaders({}, referer, response))
 
     return JSONResponse(status_code=200, content={'message': f"Connected successfully", "status": "success"}, headers=addCorsHeaders({}, referer, response))
+
+
+
+@app.post("/space/testconnection2")
+async def test_connection2(request: Request = {}, response: Response = {}):
+    referer = (request.headers.get('Referer') or '*').strip("/")
+
+    body = await request.json()
+
+    host = body.get("host", "")
+    token = body.get("testToken", "")
+
+    validToken = validateAccessToken(token)
+
+    if not validToken:
+        return JSONResponse(status_code=400, content={'message': f"Invalid token", "status": "error"}, headers=addCorsHeaders({}, referer, response))
+
+    return JSONResponse(status_code=200, content={'message': f"Connected successfully", "status": "success"}, headers=addCorsHeaders({}, referer, response))
+
+
+
+    
+@app.post("/space/testconnection3")
+async def test_connection3(request: Request = {}, response: Response = {}):
+    referer = (request.headers.get('Referer') or '*').strip("/")
+
+    body = await request.json()
+
+    host = body.get("host", "")
+    token = body.get("testToken", "")
+
+    validToken = validateAccessToken(token)
+
+    if not validToken:
+        return JSONResponse(status_code=400, content={'message': f"Invalid token", "status": "error"}, headers=addCorsHeaders({}, referer, response))
+
+    return JSONResponse(status_code=200, content={'message': f"Connected successfully", "status": "success"}, headers=addCorsHeaders({}, referer, response))
+
+
+
+    
